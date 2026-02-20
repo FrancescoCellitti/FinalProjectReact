@@ -14,14 +14,22 @@ export default function Home() {
 
   return (
     <>
-      <div className="container">
+      <div
+        className="container"
+        style={{
+          minHeight: "100vh",
+          background: "#0a0a0f",
+          paddingTop: "2rem",
+          paddingBottom: "3rem",
+        }}
+      >
         <div className="row dfle">
           {films.map((film) => (
             <div className="col-lg-4 col-md-3 col-sm-6" key={film.id}>
-              <Link to={`/film/${film.id}`}  className="text-decoration-none">
-              <Card film={film} ></Card>
-            </Link></div>
-            
+              <Link to={`/film/${film.id}`} className="text-decoration-none">
+                <Card film={film}></Card>
+              </Link>
+            </div>
           ))}
         </div>
       </div>

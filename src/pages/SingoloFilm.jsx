@@ -13,12 +13,18 @@ export default function SingoloFilm() {
       .catch((error) => console.error(error));
   }, [id]);
 
-
-  
   return (
     <>
-      <div className="container col-3 mx-auto pb-5">
-        <Card film={film} ></Card>
+      <div
+        className="mx-auto pb-5"
+        style={{
+          background: "#0a0a0f",
+          paddingTop: "1.5rem",
+          maxWidth: "480px",
+          width: "100%",
+        }}
+      >
+        <Card film={film}></Card>
       </div>
     </>
   );
