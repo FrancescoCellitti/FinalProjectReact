@@ -2,46 +2,25 @@ export default function Card({ film }) {
   return (
     <>
       <div
-        className="card card-img my-2 border-0"
+        className="card my-2 border-0"
         style={{
-          minHeight: "400px",
+          height: "400px",
           position: "relative",
           overflow: "hidden",
           background: "#12121a",
           borderRadius: "4px",
           boxShadow: "0 4px 24px rgba(0,0,0,0.6)",
-          transition: "transform 0.3s ease, box-shadow 0.3s ease",
         }}
       >
-        <img
-          src={film.image}
-          alt={film.image}
-          style={{
-            height: "360px",
-            width: "100%",
-            objectFit: "cover",
-            display: "block",
-          }}
-        />
 
-        <div
-          className="card-img p-1 my-2 border-0"
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            background: "linear-gradient(to top, rgba(10,10,15,0.97) 60%, transparent 100%)",
-            padding: "1.5rem 1rem 1rem",
-          }}
-        >
-          <ul className="list-unstyled mb-0">
+        <div className="card-body h-100 d-flex flex-column justify-content-center align-items-center text-center p-2">
+          <ul className="list-unstyled mb-0 ">
             <li>
               <h3
                 style={{
                   fontFamily: "Georgia, serif",
-                  fontSize: "1.3rem",
-                  fontWeight: 700,
+                  
+                  fontWeight: 700, 
                   letterSpacing: "1.5px",
                   color: "#e8b84b",
                   marginBottom: "0.3rem",
@@ -53,7 +32,7 @@ export default function Card({ film }) {
             </li>
             <li
               style={{
-                fontSize: "0.8rem",
+                
                 color: "#7a7670",
                 marginBottom: "0.25rem",
                 lineHeight: 1.5,
@@ -66,7 +45,6 @@ export default function Card({ film }) {
                 display: "inline-block",
                 background: "#e8b84b",
                 color: "#0a0a0f",
-                fontSize: "0.7rem",
                 fontWeight: 700,
                 letterSpacing: "1.5px",
                 padding: "0.1rem 0.5rem",
@@ -78,7 +56,6 @@ export default function Card({ film }) {
             </li>
             <li
               style={{
-                fontSize: "0.78rem",
                 color: "#a07d2a",
                 letterSpacing: "0.8px",
                 textTransform: "uppercase",
