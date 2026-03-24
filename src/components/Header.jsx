@@ -9,7 +9,7 @@ export default function Header() {
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    setQuery(params.get("q") || "")
+    setQuery(params.get("query") || "")
   }, [location.search])
   
 
@@ -17,8 +17,8 @@ export default function Header() {
     e.preventDefault();
     const q = query.trim();
     const params = new URLSearchParams(location.search);
-    if (q) params.set("q", q);
-    else params.delete("q");
+    if (q) params.set("query", q);
+    else params.delete("query");
     const search = params.toString();
     navigate(search ? `${location.pathname}?${search}` : location.pathname, { replace: false });
   }

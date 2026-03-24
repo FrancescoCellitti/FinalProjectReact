@@ -6,25 +6,26 @@ export default function Home() {
   const [films, setFilms] = useState([]);
   const [filteredfilms, setFilteredFilms] = useState([]);
   const [searchParams] = useSearchParams();
-  const query = (searchParams.get("q") || "").trim().toLowerCase();
+  const query = (searchParams.get("query") || "").trim();
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/films`)
+    fetch(`${import.meta.env.VITE_API_URL}/films` + (query ? `?query=${encodeURIComponent(query)}` : ""))
       .then((res) => res.json())
       .then((data) => {
+        const list = data || []
         setFilms(data);
-        setFilteredFilms(data);
+        setFilteredFilms(applyFilter(list, query.toLowerCase()));
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [query]);
 
   useEffect(() => {
-    setFilteredFilms(applyFilter(films, query));
+    setFilteredFilms(applyFilter(films, query.toLowerCase()));
   }, [films, query]);
 
-  function applyFilter(list, q) {
-    if (!q) return list;
-    return list.filter((film) => (film.title || "").toLowerCase().includes(q));
+  function applyFilter(list, qLower) {
+    if (!qLower) return list;
+    return list.filter((film) => (film.title || "").toLowerCase().includes(qLower));
   }
 
   return (
