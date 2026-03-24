@@ -1,4 +1,28 @@
+import { useEffect, useState } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+
 export default function Header() {
+
+  const [query, setQuery]= useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    setQuery(params.get("q") || "")
+  }, [location.search])
+  
+
+  function onSubmit(e) {
+    e.preventDefault();
+    const q = query.trim();
+    const params = new URLSearchParams(location.search);
+    if (q) params.set("q", q);
+    else params.delete("q");
+    const search = params.toString();
+    navigate(search ? `${location.pathname}?${search}` : location.pathname, { replace: false });
+  }
+
   return (
     <div
       className="container-fluid"
@@ -25,30 +49,71 @@ export default function Header() {
               borderRadius: "3px",
             }}
           >
-            <a href="/" className="text-decoration-none" style={{ color: "#e8b84b" }}>
+            <a
+              href="/"
+              className="text-decoration-none"
+              style={{ color: "#e8b84b" }}
+            >
               Home
             </a>
           </button>
+          <div className="d-flex">
+            <form onSubmit={onSubmit} style={{ maxWidth: 600 }} className="d-flex px-3">
+              <input
+              value={query}
+                type="search"
+                onChange={(e)=>setQuery(e.target.value)}
+                placeholder="Cerca..."
+                className="form-control"
+                style={{
+                  background: "transparent",
+                  border: "1px solid rgba(232, 184, 75, 0.5)",
+                  color: "#fff",
+                  padding: "0.35rem 0.75rem",
+                  borderRadius: "3px 0 0 3px",
+                  boxShadow: "none",
+                }}
+              />
+              <button
+                type="submit"
+                className="btn"
+                style={{
+                  border: "1px solid rgba(232, 184, 75, 0.5)",
+                  color: "#e8b84b",
+                  background: "transparent",
+                  letterSpacing: "1px",
+                  fontWeight: 700,
+                  padding: "0.35rem 0.9rem",
+                  borderRadius: "0 3px 3px 0",
+                }}
+              >
+                Cerca
+              </button>
+            </form>
 
-          <button
-            className="btn my-2 my-sm-0"
-            type="submit"
-            style={{
-              border: "1px solid rgba(232, 184, 75, 0.5)",
-              color: "#e8b84b",
-              background: "transparent",
-              letterSpacing: "2px",
-              fontWeight: 700,
-              fontSize: "0.85rem",
-              padding: "0.35rem 1.2rem",
-              borderRadius: "3px",
-            }}
-          >
-            <a href="http://localhost:8080/login" className="text-decoration-none" style={{ color: "#e8b84b" }}>
-              Login
-            </a>
-            
-          </button>
+            <button
+              className="btn my-2 my-sm-0"
+              type="submit"
+              style={{
+                border: "1px solid rgba(232, 184, 75, 0.5)",
+                color: "#e8b84b",
+                background: "transparent",
+                letterSpacing: "2px",
+                fontWeight: 700,
+                fontSize: "0.85rem",
+                padding: "0.35rem 1.2rem",
+                borderRadius: "3px",
+              }}
+            >
+              <a
+                href="http://localhost:8080/login"
+                className="text-decoration-none"
+                style={{ color: "#e8b84b" }}
+              >
+                Login
+              </a>
+            </button>
+          </div>
         </div>
       </div>
     </div>
